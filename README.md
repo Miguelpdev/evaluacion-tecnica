@@ -1,6 +1,6 @@
-# evaluacion-tecnica
+# Evaluacion-tecnica
 Evaluacion tecnica for backend Java
-Prueba Técnica/Práctica
+## Prueba Técnica/Práctica
 Arquitectura Microservicio
 Indicaciones generales
 * Aplique todas las buenas prácticas de programación, patrones de diseño (ejemplo: Repository), etc. que considere necesario (se tomará en cuenta este punto para la calificación).
@@ -38,20 +38,20 @@ Movimientos
 * Debe manejar su clave única.
 Funcionalidades del API
 Los API's debe tener las siguientes operaciones:
-F1: Generación de CRUDS (Crear, editar, actualizar y eliminar registros -
+### F1: Generación de CRUDS (Crear, editar, actualizar y eliminar registros -
 Entidades: Cliente, Cuenta y Movimiento).
 Los nombres de los endpoints a generar son:
 * /cuentas
 * /clientes
 * /movimientos
-F2: Registro de movimentos: al registrar un movimiento en la cuenta se debe
+### F2: Registro de movimentos: al registrar un movimiento en la cuenta se debe
 tener en cuent	a lo siguiente:
 * Para un movimiento se pueden tener valores positivos o negativos.
 * Al realizar un movimiento se debe actualizar el saldo disponible.
 * Se debe levar el registro de las transaciones realizadas.
-F3: Registro de movimientos: Al realizar un movimiento el cual no cuente con saldo, debe alertar mediante el siguiente mensaje "Saldo no disponible"
+### F3: Registro de movimientos: Al realizar un movimiento el cual no cuente con saldo, debe alertar mediante el siguiente mensaje "Saldo no disponible"
 * Defina, según su expertise, la mejor manera de capturar y mostrar el error.
-F4: Reportes: Generar un reporte de "Estado de cuenta" especificando un rango de fechas y cliente.
+### F4: Reportes: Generar un reporte de "Estado de cuenta" especificando un rango de fechas y cliente.
 * Este reporte debe contener:
 o Cuentas asociadas con sus respectivos saldos
 o Detalle de movimientos de las cuentas
@@ -59,7 +59,7 @@ o Detalle de movimientos de las cuentas
 * /reportes?fecha=rango fechas & cliente)
 * El servicio del reporte debe retornar la información en formato JSON
 * Defina, según su expertise, la mejor manera de solicitar y retornar esta información.
-F5: Pruebas unitarias: Implementar 1 prueba unitaria para la entidad de dominio
+### F5: Pruebas unitarias: Implementar 1 prueba unitaria para la entidad de dominio
 Cliente.
-F6: Pruebas de Integración: Implementar 1 prueba de integración.
-F7: Despliegue de la solución en contenedores.
+### F6: Pruebas de Integración: Implementar 1 prueba de integración.
+### F7: Despliegue de la solución en contenedores.
