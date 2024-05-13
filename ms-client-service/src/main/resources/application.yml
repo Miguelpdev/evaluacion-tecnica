@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: ms-client-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/database
+    password: secret
+    username: root
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
