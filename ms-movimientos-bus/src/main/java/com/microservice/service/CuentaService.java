@@ -20,5 +20,7 @@ public interface CuentaService {
     ResponseCuenta delete(Long id);
     ResponseCuenta get(String numeroCuenta);
 
+    List<Cuenta> obtenerCuentasPorCliente(Long clienteId);
+
 
 }

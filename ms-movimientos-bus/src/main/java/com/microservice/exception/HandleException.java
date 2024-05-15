@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -131,6 +132,11 @@ public class HandleException extends ResponseEntityExceptionHandler {
         }
         return "Ha ocurrido un error";
     }
+
+//    @ExceptionHandler(SaldoNoDisponibleException.class)
+//    public ResponseEntity<String> handleSaldoNoDisponibleException(SaldoNoDisponibleException ex) {
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+//    }
 }
 
 

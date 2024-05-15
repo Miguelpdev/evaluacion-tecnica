@@ -65,7 +65,25 @@ public class CuentaServiceImpl implements CuentaService {
 
     @Override
     public ResponseCuenta update(Long id, RequestApi requestApi) {
-        return null;
+        Cuenta existingCuenta = cuentaRepository.findById(id).orElse(null);
+        if (existingCuenta != null) {
+            if(requestApi.getNumeroCuenta() != null){
+                existingCuenta.setNumeroCuenta(requestApi.getNumeroCuenta());
+            }
+            if (requestApi.getTipoCuenta() != null){
+                existingCuenta.setTipoCuenta(requestApi.getTipoCuenta());
+            }
+            if (requestApi.getSaldoInicial() != null){
+                existingCuenta.setSaldoInicial(requestApi.getSaldoInicial());
+            }
+            if (requestApi.getEstado() != null){
+                existingCuenta.setEstado(requestApi.getEstado());
+            }
+            cuentaRepository.save(existingCuenta);
+            return ResponseCuentaMapper.buildResponseCuenta(existingCuenta);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -106,5 +124,9 @@ public class CuentaServiceImpl implements CuentaService {
         cuenta.setSaldoInicial(request.getSaldoInicial());
         cuenta.setEstado(request.getEstado());
         return cuenta;
+    }
+
+    public List<Cuenta> obtenerCuentasPorCliente(Long clienteId) {
+        return cuentaRepository.findByClienteId(clienteId);
     }
 }
