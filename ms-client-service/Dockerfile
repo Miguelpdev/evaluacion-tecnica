@@ -1,4 +1,5 @@
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk-focal AS BASE
+#FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 

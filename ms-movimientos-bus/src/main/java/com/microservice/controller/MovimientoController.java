@@ -30,7 +30,7 @@ public class MovimientoController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<Movimiento> crearMovimiento(@RequestBody Movimiento movimiento) {
         Movimiento nuevoMovimiento = movimientoService.crearMovimiento(movimiento);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoMovimiento);
@@ -53,9 +53,9 @@ public class MovimientoController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
-    public ResponseEntity<Movimiento> realizarMovimiento(@RequestBody Movimiento movimiento) {
-        Movimiento nuevoMovimiento = movimientoService.realizarMovimiento(movimiento);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoMovimiento);
-    }
+//    @PostMapping("/realizar")
+//    public ResponseEntity<Movimiento> realizarMovimiento(@RequestBody Movimiento movimiento) {
+//        Movimiento nuevoMovimiento = movimientoService.realizarMovimiento(movimiento);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoMovimiento);
+//    }
 }

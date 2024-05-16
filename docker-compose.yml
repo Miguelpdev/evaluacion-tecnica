@@ -1,77 +1,62 @@
+version: '3.9'
+
 services:
-  mysql-container:
-    image: "mysql:latest"
-    container_name: mysql-container
-    restart: always
-    environment:
-      - "MYSQL_DATABASE=sistema"
-      - "MYSQL_PASSWORD=admin"
-      - "MYSQL_USER=test"
-      - "MYSQL_ROOT_PASSWORD=admin"
-
-    ports:
-      - "3306:3306"
-    networks:
-      - springmysql
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-  spring-app1:
+  product:
+    container_name: product
+    image: microservice/product
     build: ./ms-client-service
-    container_name: api-container-1
+    mem_limit: 512M
     depends_on:
-      - mysql-container
+      - mysql
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/sistema?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/sistema?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: joice
+      SPRING_DATASOURCE_PASSWORD: password
     networks:
       - springmysql
 
-  spring-app2:
+  review:
+    container_name: review
+    image: microservice/review
     build: ./ms-movimientos-bus
-    container_name: api-container-2
+    mem_limit: 512M
     depends_on:
-      - mysql-container
+      - mysql
     ports:
-      - "8080:8080"
+      - "8082:8082"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/sistema?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/sistema?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: joice
+      SPRING_DATASOURCE_PASSWORD: password
     networks:
       - springmysql
+
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    mem_limit: 512M
+    volumes:
+      - sqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=joice
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=sistema
+    networks:
+      - springmysql
+    healthcheck:
+      test: "mysql -u root -p$$MYSQL_ROOT_PASSWORD  -e 'SHOW DATABASES'"
+      interval: 5s
+      timeout: 2s
+      retries: 60
 
 volumes:
-  mysql_data:
+  sqldata:
 
 networks:
-  springmysql:
-    name: springmysql
-
-#######
-# services:
-#   mysql:
-#     image: "mysql:latest"
-#     environment:
-#       - 'MYSQL_DATABASE=samples_dev_db'
-#       - 'MYSQL_PASSWORD=Mysql123#@!'
-#       - 'MYSQL_USER=mysqluser'
-#       - 'MYSQL_ROOT_PASSWORD=Root123#@!'
-
-#     ports:
-#       - '3307:3307'
-#   application:
-#     build: ./ms-client-service
-#     ports:
-#       - "9099:9099"
-#     depends_on:
-#       - mysql
-#     environment:
-#       SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3307/samples_dev_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-#       SPRING_DATASOURCE_USERNAME: mysqluser
-#       SPRING_DATASOURCE_PASSWORD: Mysql123#@!
-# volumes:
-#   mysql-data:
+   springmysql:
+     name: springmysql
