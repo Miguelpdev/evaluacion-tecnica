@@ -4,14 +4,18 @@ import com.microservice.exception.ApiException;
 import com.microservice.mapper.CuentaMapper;
 import com.microservice.mapper.ResponseCuentaMapper;
 import com.microservice.model.Cuenta;
+import com.microservice.model.Movimiento;
 import com.microservice.model.request.RequestApi;
 import com.microservice.model.response.ResponseCuenta;
 import com.microservice.repository.CuentaRepository;
+import com.microservice.repository.MovimientoRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +24,7 @@ import java.util.List;
 public class CuentaServiceImpl implements CuentaService {
 
     CuentaRepository cuentaRepository;
+    MovimientoRepository movimientoRepository;
 
     public List<Cuenta> obtenerTodasLasCuentas() {
         return cuentaRepository.findAll();
@@ -104,7 +109,7 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     private Cuenta getCuenta(String numeroCuenta){
-        return cuentaRepository.findByNumeroCuenta(numeroCuenta)
+        return cuentaRepository.findOptionalByNumeroCuenta(numeroCuenta)
                 .orElseThrow(() -> {
             throw new ApiException(String.format("No existe la cuenta %s", numeroCuenta));
         });
@@ -128,5 +133,26 @@ public class CuentaServiceImpl implements CuentaService {
 
     public List<Cuenta> obtenerCuentasPorCliente(Long clienteId) {
         return cuentaRepository.findByClienteId(clienteId);
+    }
+
+    @Transactional
+    public Movimiento registrarMovimiento(String numeroCuenta, Movimiento movimiento) {
+        Cuenta cuenta = cuentaRepository.findByNumeroCuenta(numeroCuenta);
+        if (cuenta == null) {
+            throw new RuntimeException("Cuenta no encontrada");
+        }
+
+        //double nuevoSaldo = cuenta.getSaldoInicial() + movimiento.getValor();
+        BigDecimal nuevoSaldo = cuenta.getSaldoInicial().add(movimiento.getValor());
+        cuenta.setSaldoInicial(nuevoSaldo);
+        cuentaRepository.save(cuenta);
+
+        movimiento.setFecha(LocalDateTime.now());
+        //movimiento.setSaldo(nuevoSaldo);
+        movimiento.setSaldoActual(nuevoSaldo);
+        //movimiento.setCuenta(cuenta);
+        movimiento.setCuentaId(cuenta);
+
+        return movimientoRepository.save(movimiento);
     }
 }

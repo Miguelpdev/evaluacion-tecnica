@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CuentaRepository extends JpaRepository<Cuenta, Long> {
-    Optional<Cuenta> findByNumeroCuenta(String numeroCuenta);
+    Optional<Cuenta> findOptionalByNumeroCuenta(String numeroCuenta);
+    Cuenta findByNumeroCuenta(String numeroCuenta);
     @Query("SELECT c FROM Cuenta c WHERE c.clienteId = :clienteId")
     List<Cuenta> findByClienteId(Long clienteId);
 }

@@ -1,6 +1,7 @@
 package com.microservice.service;
 
 import com.microservice.model.Cuenta;
+import com.microservice.model.Movimiento;
 import com.microservice.model.request.RequestApi;
 import com.microservice.model.response.ResponseCuenta;
 
@@ -21,6 +22,7 @@ public interface CuentaService {
     ResponseCuenta get(String numeroCuenta);
 
     List<Cuenta> obtenerCuentasPorCliente(Long clienteId);
+    Movimiento registrarMovimiento(String numeroCuenta, Movimiento movimiento);
 
 
 }

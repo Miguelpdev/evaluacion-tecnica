@@ -2,6 +2,7 @@ package com.microservice.controller;
 
 import com.microservice.constants.Constantes;
 import com.microservice.model.Cuenta;
+import com.microservice.model.Movimiento;
 import com.microservice.model.request.RequestApi;
 import com.microservice.model.response.ResponseApi;
 import com.microservice.model.response.ResponseCuenta;
@@ -126,6 +127,11 @@ public class CuentaRestController {
                         .build(),
                 HttpStatus.OK
         );
+    }
+
+    @PostMapping("/{numeroCuenta}/movimientos")
+    public Movimiento registrarMovimiento(@PathVariable String numeroCuenta, @RequestBody Movimiento movimiento) {
+        return cuentaService.registrarMovimiento(numeroCuenta, movimiento);
     }
 
 

@@ -9,6 +9,7 @@ import com.microservice.model.Cuenta;
 import com.microservice.model.Movimiento;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ReporteServiceImpl implements ReporteService{
 
     CuentaService cuentaService;
 
-    public ReporteEstadoCuenta generarReporteEstadoCuenta(Date fechaInicio, Date fechaFin, Long clienteId) {
+    public ReporteEstadoCuenta generarReporteEstadoCuenta(LocalDateTime fechaInicio, LocalDateTime fechaFin, Long clienteId) {
         // Obtener la lista de cuentas asociadas al cliente
         List<Cuenta> cuentas = cuentaService.obtenerCuentasPorCliente(clienteId);
 
