@@ -1,5 +1,5 @@
-# APIRest
-## Method POST 
+# APIRest 🏦
+## Method POST ▶️
 - Realizar movimiento
 - &copy;
 - &rarr;
@@ -23,7 +23,7 @@
     "clienteId": 1
 }
 ```
-## Method PATCH
+## Method PATCH ▶️
 - Actualizar tipo cuenta
 
 `http://localhost:8082/api/v1/cuentas/update/{cuentaId}`
@@ -32,7 +32,7 @@
     "tipoCuenta": "Nomina"
 }
 ```
-## Method GET
+## Method GET ▶️
 - Obtener reporte por fechas y cliente
 
 `http://localhost:8082/api/v1/reportes?fechaInicio=2024-05-13T14:07:22&fechaFin=2024-05-14T14:07:22&clienteId=2`
