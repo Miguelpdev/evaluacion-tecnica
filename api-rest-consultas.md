@@ -3,8 +3,8 @@
 > Useful information that users should know.
 ## Method POST ▶️
 - Realizar movimiento
-- &copy;
-- &rarr;
+<!-- - &copy;
+- &rarr; -->
 
 >`http://localhost:8082/api/v1/cuentas/{numeroCuenta}/movimientos`
 ```
@@ -15,7 +15,7 @@
 ```
 - Crear cuenta
 
-`http://localhost:8082/api/v1/cuentas`
+> `http://localhost:8082/api/v1/cuentas`
 ```
 {
     "numeroCuenta": "123222222",
@@ -28,7 +28,7 @@
 ## Method PATCH ▶️
 - Actualizar tipo cuenta
 
-`http://localhost:8082/api/v1/cuentas/update/{cuentaId}`
+> `http://localhost:8082/api/v1/cuentas/update/{cuentaId}`
 ```
 {
     "tipoCuenta": "Nomina"
@@ -37,5 +37,5 @@
 ## Method GET ▶️
 - Obtener reporte por fechas y cliente
 
-`http://localhost:8082/api/v1/reportes?fechaInicio=2024-05-13T14:07:22&fechaFin=2024-05-14T14:07:22&clienteId=2`
+> `http://localhost:8082/api/v1/reportes?fechaInicio=2024-05-13T14:07:22&fechaFin=2024-05-14T14:07:22&clienteId=2`
 
