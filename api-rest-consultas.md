@@ -1,8 +1,10 @@
-# ApiRest
-## Method POST
+# APIRest
+## Method POST 
 - Realizar movimiento
+- &copy;
+- &rarr;
 
-`http://localhost:8082/api/v1/cuentas/{numeroCuenta}/movimientos`
+>`http://localhost:8082/api/v1/cuentas/{numeroCuenta}/movimientos`
 ```
 {
     "tipoMovimiento": "Depósito",
@@ -24,7 +26,7 @@
 ## Method PATCH
 - Actualizar tipo cuenta
 
-`http://localhost:8082/api/v1/cuentas/update/8`
+`http://localhost:8082/api/v1/cuentas/update/{cuentaId}`
 ```
 {
     "tipoCuenta": "Nomina"
