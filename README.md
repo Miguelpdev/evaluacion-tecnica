@@ -63,3 +63,61 @@ Los nombres de los endpoints a generar son:
 ### F5: Pruebas unitarias: Implementar 1 prueba unitaria para la entidad de dominio Cliente.
 ### F6: Pruebas de Integración: Implementar 1 prueba de integración.
 ### F7: Despliegue de la solución en contenedores.
+## Casos de uso (ejemplos)
+
+1. Creacion de Usuarios
+
+| Nombres  | Direccion | Telefono  | Contraseña | Estado |
+|----------|-----------|-----------|------------|--------|
+| Jose Lema| Otavio sn | 098254785 |1234|True|
+| Marianela Montalvo| Amazonas y NNuU  | 097548065  |5676|True|
+| Juan Osorio| 13 junio   | 098874587   |1245|True|
+
+2. Creacion de Cuentas de Usuario
+
+| Numero cuenta | Tipo | saldo inicial | estado | cliente |
+|----------|-----------|----------|-------|--------|
+| 478758   | Ahorros   | 2000  | True | Jose Lema |
+| 225487   | Corriente | 100   | True | Marianela Montalvo |
+| 495878   | Ahorros   | 0   | True | Juan Osorio |
+| 496825   | Ahorros   | 540 | True | Marianela Montalvo |
+
+3. Crear una nueva Cuenta Corriente para Jose Lema
+
+| Numero cuenta | Tipo | saldo inicial | estado | cliente |
+|----------|-----------|----------|-------|--------|
+| 585545   | Corriente   | 1000  | True | Jose Lema |
+
+4. Realizar los siguientes movimientos
+
+| Numero cuenta | Tipo | saldo inicial | estado | movimiento |
+|----------|-----------|----------|-------|--------|
+| 478758   | Ahorros   | 2000  | True | Retiro de 575 |
+| 225487   | Corriente | 100   | True | Deposito de 600 |
+| 495878   | Ahorros   | 0     | True | Deposito de 150 |
+| 496825   | Ahorros   | 540   | True | Retiro de 540 |
+
+5. Listado de Movimiento por fecha x usuario
+
+| Fecha   | Cliente   | Numero cuenta | Tipo   | Saldo inicial | Estado | Movimiento | Saldo Disponible |
+|---------|-----------|---------------|--------|---------------|--------|------------|------------------|
+|16/02/2022|Marianela Montalvo|225487|Corriente|100|True|600|700|
+|08/02/2022|Marianela Montalvo|496825|Ahorros|540|True|-540|0|
+
+- Ejemplo Json:
+```
+{
+    "Fecha":"10/02/2022",
+    "Cliente":"Marianela Montalvo",
+    "Numero Cuenta":"225487",
+    "Tipo":"Corriente",
+    "Saldo Inicial":100,
+    "Estado":true,
+    "Movimiento":600,
+    "Saldo Disponible":700
+}
+```
+## Instrucciones de despliegue / Entregables
+- Generar el script de base de datos, entidades y esquemas datos. con el nombre BaseDatos.sql.
+- Incluir archivo Json, de aplicacion Postman, pra validacion de los endpoints. (http://{servidor}:{puerto}/api/{metodo}...{parametros})
+- En el caso de usar Karate, incluir el set de pruebas en el proyecto Java, garantizando que se ejecuten junto a todos los tests.

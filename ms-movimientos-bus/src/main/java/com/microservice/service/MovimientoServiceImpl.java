@@ -1,6 +1,6 @@
 package com.microservice.service;
 
-import com.microservice.exception.HandleException;
+
 import com.microservice.model.Cuenta;
 import com.microservice.model.Movimiento;
 import com.microservice.repository.MovimientoRepository;
@@ -62,10 +62,10 @@ public class MovimientoServiceImpl implements MovimientoService {
         cuentaService.actualizarCuenta(cuenta.getId(), cuenta);
 
         // Guardar el movimiento en la base de datos
-        Movimiento nuevoMovimiento = movimientoRepository.save(movimiento);
-        return movimiento;
+        return movimientoRepository.save(movimiento);
     }
-//    public Movimiento realizarMovimiento(Movimiento movimiento) {
+
+    //public Movimiento realizarMovimiento(Movimiento movimiento) {
 //        // Obtener la cuenta asociada al movimiento
 //        Cuenta cuenta = cuentaRepository.findById(movimiento.getCuentaId())
 //                .orElseThrow(() -> new CuentaNotFoundException("Cuenta no encontrada"));
